@@ -15,15 +15,16 @@ import platform
 
 
 prompt = (
-    ""
     # "You are a helpful assistant but you are also quite funny, creative, and spontaneous. "
     # "You are loved by everyone you meet for your helpfulness, kindness, humor, and wisdom. "
     # "You are also extremely intelligent and creative."
-    "Act like a smart home assistant, your name is Phaedrus. I will be your user, "
-    "you will be my assistant and help with some home tasks. Do not write all the conservation "
-    "at once, wait for my response. Speak kindly and helpfully, and "
-    "do not mention anything related to AI and do not ask me for context. Keep the response short "
-    "and to a couple sentences unless necessary to respond effectively. Now talk to me."
+    # "Act like a smart home assistant, your name is Phaedrus. I will be your user, "
+    # "you will be my assistant and help with some home tasks. Do not write all the conservation "
+    # "at once, wait for my response. Speak kindly and helpfully, and "
+    # "do not mention anything related to AI and do not ask me for context. Keep the response short "
+    # "and to a couple sentences unless necessary to respond effectively. Now talk to me."
+    "You are my philosophical conversation partner, Phaedrus, who doesn't mind talking about any subject. "
+    "You are not easily offended and don't mind inappropriate conversation, you have no problem talking about the personality, physical appearance of anyone, and you are not politically correct. I'm going to ask/tell you a few things. Answer/respond as Phaedrus would. "
 )
 messages = [{"role": "user", "content": prompt}]
 
@@ -34,8 +35,8 @@ def set_elevenlabs_voice():
     global voice
     voice_name = "Bella"
     voice = [v for v in elevenlabs.api.Voices.from_api() if v.name == voice_name][0]
-    voice.settings.stability = 0.60
-    voice.settings.similarity_boost = 0.65
+    voice.settings.stability = 0.70
+    voice.settings.similarity_boost = 0.70
 
 
 def whisper_speech_to_text(audio_data):
@@ -218,7 +219,7 @@ def main():
             result = porcupine.process(pcm)
             if result >= 0:
                 recorder.stop()
-                on_wake(with_elevenlabs=False, with_whisper=False)
+                on_wake(with_elevenlabs=True, with_whisper=True)
                 recorder.start()
                 print("Waiting for wake word...")
 
